@@ -1,0 +1,35 @@
+{
+  "id": "A84002C28BC776CD",
+  "seatbid": [
+    {
+      "bid": [
+        {
+          "id": "9bd9ecc7-7141-428f-a6a3-4aa6c55a902e",
+          "impid": "53225A431DB4682A",
+          "price": 5.572,
+          "adid": "88782465",
+          "nurl": "http://ads240.adtelligent.com/tracking/win?adid=A84002C28BC776E3&aid=938711&event=nurl",
+          "adm": "<?xml version=\"1.0\" encoding=\"UTF-8\" ?><VAST version=\"3.0\"><Ad id=\"A84002C28BC776E3\"><Wrapper><AdSystem version=\"1.0\">AdServer</AdSystem><VASTAdTagURI><![CDATA[http://ads240.adtelligent.com/vast/?adid=A84002C28BC776E3&aid=938711&cmpId=824874&cb=1786733994&uts=1748561444]]></VASTAdTagURI><Impression><![CDATA[http://ads240.adtelligent.com/tre/imp/?adid=A84002C28BC776E3&aid=938711&cmpId=824874&uts=1748561444]]></Impression><Impression><![CDATA[https://adrta.com/i?clid=stk&paid=at&dvid=v&avid=739077&caid=824874&publisherId=774331&plid=A84002C28BC776E3&kv1=1920x1080&kv2=&kv4=172.56.3.177&siteId=938711&kv3=ff847756ed851bea&kv7=938711&kv9=&kv10=T-Mobile+USA&kv11=1570132000&kv13=&kv16=38.9994&kv17=-77.0336&kv18=B092DXNHYF&kv19=59ab6c85-655a-40ad-a062-fefcb150fa70&kv20=59ab6c85-655a-40ad-a062-fefcb150fa70&kv21=59ab6c85-655a-40ad-a062-fefcb150fa70&kv23=T-Mobile+USA&kv25=Learn+Spanish+Today&kv26=7.1.2&kv27=Mozilla%2F5.0+%28Linux%3B+Android+7.1.2%3B+AFTMM+Build%2FNS6709%3B+wv%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Version%2F4.0+Chrome%2F118.0.0.0+Mobile+Safari%2F537.36%2Cgzip%28gfe&kv28=_&kv29=[ERRORCODE]&kv30=[CONTENTPLAYHEAD]_[ADPLAYHEAD]&kv33=[ASSETURI]&kv34=[VASTVERSIONS]&kv35=[IFATYPE]&kv36=[IFA]&kv37=[CLIENTUA]&kv38=[SERVERUA]&kv39=[DEVICEUA]&kv40=[DEVICEIP]&kv41=[LATLONG]&kv42=[DOMAIN]&kv43=[PAGEURL]&kv44=autoplay&kv45=[PLAYERSIZE]&kv46=[REGULATIONS]&kv47=[ADTYPE]&kv48=[TRANSACTIONID]&kv49=[BREAKPOSITION]&kv50=[APPNAME]&kv51=[PLACEMENTTYPE]&kv54=[LAT]&kv24=OTT_Video]]></Impression><Creatives><Creative><Linear><TrackingEvents><Tracking event=\"creativeView\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=52&aid=938711]]></Tracking><Tracking event=\"start\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=53&aid=938711]]></Tracking><Tracking event=\"midpoint\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=54&aid=938711]]></Tracking><Tracking event=\"firstQuartile\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=55&aid=938711]]></Tracking><Tracking event=\"thirdQuartile\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=56&aid=938711]]></Tracking><Tracking event=\"complete\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=57&aid=938711]]></Tracking><Tracking event=\"skip\"><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=66&aid=938711]]></Tracking></TrackingEvents><VideoClicks><ClickTracking><![CDATA[http://ads240.adtelligent.com/t/e/?adid=A84002C28BC776E3&code=71&aid=938711]]></ClickTracking></VideoClicks></Linear></Creative></Creatives><Extensions></Extensions></Wrapper></Ad></VAST>",
+          "adomain": [
+            "fanatics.com"
+          ],
+          "iurl": "https://us.a.serve26.com/test/imp?crid=88782465&lid=88783861&token=RTB&ct=vast&ap=1403&ssp=sovrn",
+          "cid": "88783861",
+          "crid": "88782465",
+          "cat": [
+            "IAB17",
+            "IAB9-7"
+          ],
+          "w": 1920,
+          "h": 1080,
+          "exp": 3300,
+          "burl": "http://ads240.adtelligent.com/tracking/win?adid=A84002C28BC776E3&aid=938711&event=burl",
+          "lurl": "http://ads240.adtelligent.com/tracking/lurl?adid=A84002C28BC776E3&aid=938711"
+        }
+      ],
+      "seat": "12"
+    }
+  ],
+  "bidid": "A84002C28BC776CD",
+  "cur": "USD"
+}

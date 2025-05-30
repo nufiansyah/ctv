@@ -1,0 +1,104 @@
+{
+  "id": "462330ADBEBEB3A8",
+  "imp": [
+    {
+      "id": "9EC8A2C5CF78F17F",
+      "video": {
+        "mimes": [
+          "video/mp4"
+        ],
+        "linearity": 1,
+        "minduration": 3,
+        "maxduration": 300,
+        "protocols": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "w": 1920,
+        "h": 1080,
+        "startdelay": 0,
+        "sequence": 1,
+        "boxingallowed": 1,
+        "api": [
+          1,
+          2
+        ]
+      },
+      "bidfloor": 5.75,
+      "bidfloorcur": "USD"
+    }
+  ],
+  "app": {
+    "id": "7119655",
+    "name": "hgtv go",
+    "bundle": "b017jevtp4",
+    "publisher": {
+      "id": "568143"
+    },
+    "storeurl": "https://www.amazon.com/dp/b017jevtp4"
+  },
+  "device": {
+    "ua": "Dalvik/2.1.0 (Linux; U; Android 7.1.2; AFTBAMR311 Build/NS6293)",
+    "ip": "107.145.235.191",
+    "geo": {
+      "lat": 28.5978,
+      "lon": -81.3024,
+      "country": "USA",
+      "region": "FL",
+      "metro": "534",
+      "city": "Winter Park",
+      "zip": "32789",
+      "type": 2,
+      "accuracy": 5,
+      "ipservice": 3
+    },
+    "carrier": "Spectrum",
+    "os": "Android",
+    "osv": "7.1.2",
+    "devicetype": 3,
+    "ifa": "c9416509-7b6d-a559-cc60-1f82461c7c62",
+    "ext": {
+      "ifa_type": "afai"
+    }
+  },
+  "regs": {
+    "coppa": 0,
+    "ext": {}
+  },
+  "user": {
+    "id": "90adc699d6d7cf31",
+    "ext": {}
+  },
+  "at": 1,
+  "tmax": 1500,
+  "allimps": 0,
+  "cur": [
+    "USD"
+  ],
+  "bcat": [
+    "IAB26"
+  ],
+  "source": {
+    "ext": {
+      "schain": {
+        "complete": 1,
+        "nodes": [
+          {
+            "asi": "adtelligent.com",
+            "sid": "568143",
+            "rid": "462330ADBEBEB3A8",
+            "hp": 1
+          }
+        ],
+        "ver": "1.0"
+      }
+    }
+  },
+  "ext": {
+    "vistar": {}
+  }
+}
