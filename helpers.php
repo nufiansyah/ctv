@@ -10,7 +10,9 @@ function generateRequestId(): string {
     try {
         return bin2hex(random_bytes(16));
     } catch (Exception $e) {
-        error_log("UUID generation failed: " . $e->getMessage());
+        if (ini_get('log_errors')) {
+            error_log("UUID generation failed: " . $e->getMessage());
+        }
         return uniqid('fallback-', true);
     }
 }
