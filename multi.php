@@ -23,9 +23,8 @@ const DEFAULT_BIDFLOOR = 3;
 const DEFAULT_BIDFLOOR_CUR = 'USD';
 const DEFAULT_MIN_DURATION = 5;
 const DEFAULT_MAX_DURATION = 30;
-// Controls no-bid HTTP status and seatbid validation requirements; adjust as needed per deployment.
-const NO_BID_HTTP_CODE = 204;
-const REQUIRE_SEATBID_VALIDATION = true;
+const NO_BID_HTTP_CODE = 204; // HTTP status to use when no compatible bid is returned.
+const REQUIRE_SEATBID_VALIDATION = true; // Set to false to allow DSP responses without seatbid arrays.
 
 // ==================== Error Handling ====================
 error_reporting(E_ALL);
