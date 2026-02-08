@@ -17,28 +17,9 @@ ini_set('display_errors', '0');
 ini_set('log_errors', '1');
 ini_set('error_log', __DIR__ . '/php_errors.log');
 
+require_once __DIR__ . '/helpers.php';
+
 // ==================== Helper Functions ====================
-
-/**
- * Generate secure UUID
- */
-function generateRequestId(): string {
-    try {
-        return bin2hex(random_bytes(16));
-    } catch (Exception $e) {
-        error_log("UUID generation failed: " . $e->getMessage());
-        return uniqid('fallback-', true);
-    }
-}
-
-/**
- * Build empty VAST response
- */
-function buildEmptyVAST(): string {
-    $xml = new SimpleXMLElement('<VAST/>');
-    $xml->addAttribute('version', '4.0');
-    return $xml->asXML();
-}
 
 /**
  * Validate and sanitize input parameters
@@ -116,50 +97,6 @@ function makeDspRequest(array $ortbRequest, int $timeout = DEFAULT_TIMEOUT_MS): 
 }
 
 /**
- * Process DSP response and select best bid
- */
-function processBids(array $dspResponse, int $width, int $height): array {
-    $bestBid = null;
-    $highestPrice = 0;
-
-    foreach ($dspResponse['seatbid'] ?? [] as $seatbid) {
-        foreach ($seatbid['bid'] ?? [] as $bid) {
-            if (!empty($bid['adm']) && ($bid['price'] ?? 0) >= $highestPrice) {
-                // Additional checks for creative compatibility
-                if (isCreativeCompatible($bid, $width, $height)) {
-                    $bestBid = $bid;
-                    $highestPrice = $bid['price'];
-                }
-            }
-        }
-    }
-
-    if (!$bestBid) {
-        throw new Exception("No valid compatible bids received");
-    }
-
-    return $bestBid;
-}
-
-/**
- * Check if creative is compatible with requested dimensions
- */
-function isCreativeCompatible(array $bid, int $width, int $height): bool {
-    // Extract creative dimensions from bid (implementation depends on DSP response structure)
-    $creativeWidth = $bid['w'] ?? 0;
-    $creativeHeight = $bid['h'] ?? 0;
-    
-    // Basic aspect ratio check
-    if ($creativeWidth > 0 && $creativeHeight > 0) {
-        $requestRatio = $width / $height;
-        $creativeRatio = $creativeWidth / $creativeHeight;
-        return abs($requestRatio - $creativeRatio) < 0.1; // 10% tolerance
-    }
-    
-    return true; // Assume compatible if dimensions not specified
-}
-
-/**
  * Inject auction price macro into VAST XML
  */
 function injectAuctionPrice(string $vastXml, float $price): string {
@@ -229,8 +166,8 @@ try {
     // 3. Send to DSP with retry logic
     $dspResponse = makeDspRequest($ortbRequest);
 
-    // 4. Process bids and select best one
-    $winningBid = processBids($dspResponse, $params['width'], $params['height']);
+    // 4. Process bids and select best one (keep zm2 behavior: no seatbid enforcement, generic errors)
+    $winningBid = processBids($dspResponse, $params['width'], $params['height'], false, null);
 
     // 5. Inject auction price macro if present in the VAST
     $vastXml = $winningBid['adm'];

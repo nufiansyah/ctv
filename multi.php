@@ -23,27 +23,17 @@ const DEFAULT_BIDFLOOR = 3;
 const DEFAULT_BIDFLOOR_CUR = 'USD';
 const DEFAULT_MIN_DURATION = 5;
 const DEFAULT_MAX_DURATION = 30;
+const NO_BID_HTTP_CODE = 204; // Exception code (and resulting HTTP status) when no compatible bid is returned.
+const REQUIRE_SEATBID_VALIDATION = true; // Set to false to allow DSP responses without seatbid arrays.
 
 // ==================== Error Handling ====================
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
 ini_set('log_errors', '0'); // Do not log errors
 
+require_once __DIR__ . '/helpers.php';
+
 // ==================== Helper Functions ====================
-
-function generateRequestId(): string {
-    try {
-        return bin2hex(random_bytes(16));
-    } catch (Exception $e) {
-        return uniqid('fallback-', true);
-    }
-}
-
-function buildEmptyVAST(): string {
-    $xml = new SimpleXMLElement('<VAST/>');
-    $xml->addAttribute('version', '4.0');
-    return $xml->asXML();
-}
 
 function clamp_int(int $value, int $min, int $max): int {
     return max($min, min($value, $max));
@@ -155,49 +145,6 @@ function makeMultiDspRequest(array $ortbRequest, int $timeout = DEFAULT_TIMEOUT_
     throw new Exception("No valid response from any DSP endpoint", 502);
 }
 
-function processBids(array $dspResponse, int $width, int $height): array {
-    if (empty($dspResponse['seatbid'])) {
-        throw new Exception("No seatbids in DSP response", 204);
-    }
-
-    $bestBid = null;
-    $highestPrice = 0.0;
-
-    foreach ($dspResponse['seatbid'] as $seatbid) {
-        if (empty($seatbid['bid'])) continue;
-
-        foreach ($seatbid['bid'] as $bid) {
-            if (empty($bid['adm'])) continue;
-
-            $bidPrice = $bid['price'] ?? 0;
-            if ($bidPrice >= $highestPrice && isCreativeCompatible($bid, $width, $height)) {
-                $bestBid = $bid;
-                $highestPrice = $bidPrice;
-            }
-        }
-    }
-
-    if (!$bestBid) {
-        throw new Exception("No valid compatible bids received", 204);
-    }
-
-    return $bestBid;
-}
-
-function isCreativeCompatible(array $bid, int $width, int $height): bool {
-    $creativeWidth = $bid['w'] ?? 0;
-    $creativeHeight = $bid['h'] ?? 0;
-
-    if ($creativeWidth <= 0 || $creativeHeight <= 0) {
-        return true;
-    }
-
-    $requestRatio = $width / $height;
-    $creativeRatio = $creativeWidth / $creativeHeight;
-
-    return abs($requestRatio - $creativeRatio) < 0.1;
-}
-
 function processVAST(string $vastXml, ?float $price = null): string {
     if (empty(trim($vastXml))) {
         throw new Exception("Empty VAST response from DSP", 500);
@@ -273,7 +220,14 @@ try {
     ];
 
     $dspResponse = makeMultiDspRequest($ortbRequest);
-    $winningBid = processBids($dspResponse, $params['width'], $params['height']);
+    $winningBid = processBids(
+        $dspResponse,
+        $params['width'],
+        $params['height'],
+        REQUIRE_SEATBID_VALIDATION,
+        NO_BID_HTTP_CODE,
+        NO_BID_HTTP_CODE
+    );
     $vastXml = processVAST($winningBid['adm'], $winningBid['price'] ?? null);
 
     echo $vastXml;
