@@ -218,7 +218,9 @@ try {
     ];
 
     $dspResponse = makeMultiDspRequest($ortbRequest);
-    $winningBid = processBids($dspResponse, $params['width'], $params['height'], 204, true);
+    $noBidHttpCode = 204;
+    $requireSeatbidValidation = true;
+    $winningBid = processBids($dspResponse, $params['width'], $params['height'], $noBidHttpCode, $requireSeatbidValidation);
     $vastXml = processVAST($winningBid['adm'], $winningBid['price'] ?? null);
 
     echo $vastXml;
