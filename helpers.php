@@ -66,7 +66,7 @@ function isCreativeCompatible(array $bid, int $width, int $height): bool {
  */
 function processBids(array $dspResponse, int $width, int $height, ?int $noBidCode = null, bool $requireSeatbid = false): array {
     if ($requireSeatbid && empty($dspResponse['seatbid'])) {
-        throw new Exception("Required seatbids missing from DSP response", $noBidCode ?? 0);
+        throw new Exception("Required seatbid array missing from DSP response", $noBidCode ?? 0);
     }
 
     $bestBid = null;
