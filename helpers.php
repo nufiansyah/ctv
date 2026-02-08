@@ -56,14 +56,14 @@ function isCreativeCompatible(array $bid, int $width, int $height): bool {
  * @param int      $width              Requested player width.
  * @param int      $height             Requested player height.
  * @param int|null $noBidCode          Optional HTTP code to attach to error cases.
- * @param bool     $requireSeatBid     Whether to fail fast when seatbid is missing.
+ * @param bool     $requireSeatbid     Whether to fail fast when seatbid is missing.
  *
  * @throws Exception When no compatible bid is found.
  *
  * @return array The highest-priced compatible bid.
  */
-function processBids(array $dspResponse, int $width, int $height, ?int $noBidCode = null, bool $requireSeatBid = false): array {
-    if ($requireSeatBid && empty($dspResponse['seatbid'])) {
+function processBids(array $dspResponse, int $width, int $height, ?int $noBidCode = null, bool $requireSeatbid = false): array {
+    if ($requireSeatbid && empty($dspResponse['seatbid'])) {
         throw new Exception("No seatbids in DSP response", $noBidCode ?? 0);
     }
 

@@ -166,8 +166,8 @@ try {
     // 3. Send to DSP with retry logic
     $dspResponse = makeDspRequest($ortbRequest);
 
-    // 4. Process bids and select best one (defaults preserve original zm2 error handling)
-    $winningBid = processBids($dspResponse, $params['width'], $params['height']);
+    // 4. Process bids and select best one (explicit defaults preserve original zm2 error handling)
+    $winningBid = processBids($dspResponse, $params['width'], $params['height'], null, false);
 
     // 5. Inject auction price macro if present in the VAST
     $vastXml = $winningBid['adm'];
