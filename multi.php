@@ -23,6 +23,7 @@ const DEFAULT_BIDFLOOR = 3;
 const DEFAULT_BIDFLOOR_CUR = 'USD';
 const DEFAULT_MIN_DURATION = 5;
 const DEFAULT_MAX_DURATION = 30;
+// Controls bid validation behavior; adjust as needed per deployment.
 const NO_BID_HTTP_CODE = 204;
 const REQUIRE_SEATBID_VALIDATION = true;
 
