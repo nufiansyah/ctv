@@ -167,7 +167,7 @@ try {
     $dspResponse = makeDspRequest($ortbRequest);
 
     // 4. Process bids and select best one (keep zm2 behavior: no seatbid enforcement, generic errors)
-    $winningBid = processBids($dspResponse, $params['width'], $params['height'], null, false);
+    $winningBid = processBids($dspResponse, $params['width'], $params['height'], false, null);
 
     // 5. Inject auction price macro if present in the VAST
     $vastXml = $winningBid['adm'];

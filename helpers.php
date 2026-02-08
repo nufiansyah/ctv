@@ -54,19 +54,22 @@ function isCreativeCompatible(array $bid, int $width, int $height): bool {
 /**
  * Select the best compatible bid from a DSP response.
  *
- * @param array    $dspResponse        Response payload from DSP.
- * @param int      $width              Requested player width.
- * @param int      $height             Requested player height.
- * @param int|null $noBidCode          Optional HTTP code to attach to error cases.
- * @param bool     $requireSeatbid     Whether to fail fast when seatbid is missing.
+ * @param array    $dspResponse         Response payload from DSP.
+ * @param int      $width               Requested player width.
+ * @param int      $height              Requested player height.
+ * @param bool     $requireSeatbid      Whether to fail fast when seatbid is missing.
+ * @param int|null $noBidCode           Optional code to attach when no compatible bid exists.
+ * @param int|null $missingSeatbidCode  Optional code to use when seatbid validation fails (defaults to $noBidCode).
  *
  * @throws Exception When no compatible bid is found.
  *
  * @return array The highest-priced compatible bid.
  */
-function processBids(array $dspResponse, int $width, int $height, ?int $noBidCode = null, bool $requireSeatbid = false): array {
+function processBids(array $dspResponse, int $width, int $height, bool $requireSeatbid = false, ?int $noBidCode = null, ?int $missingSeatbidCode = null): array {
+    $seatbidCode = $missingSeatbidCode ?? $noBidCode;
+
     if ($requireSeatbid && empty($dspResponse['seatbid'])) {
-        throw new Exception("Required seatbid array missing from DSP response", $noBidCode ?? 0);
+        throw new Exception("Required seatbid array missing from DSP response", $seatbidCode ?? 0);
     }
 
     $bestBid = null;

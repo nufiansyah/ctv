@@ -23,7 +23,7 @@ const DEFAULT_BIDFLOOR = 3;
 const DEFAULT_BIDFLOOR_CUR = 'USD';
 const DEFAULT_MIN_DURATION = 5;
 const DEFAULT_MAX_DURATION = 30;
-const NO_BID_HTTP_CODE = 204; // HTTP status to use when no compatible bid is returned.
+const NO_BID_HTTP_CODE = 204; // Exception code (and resulting HTTP status) when no compatible bid is returned.
 const REQUIRE_SEATBID_VALIDATION = true; // Set to false to allow DSP responses without seatbid arrays.
 
 // ==================== Error Handling ====================
@@ -220,7 +220,14 @@ try {
     ];
 
     $dspResponse = makeMultiDspRequest($ortbRequest);
-    $winningBid = processBids($dspResponse, $params['width'], $params['height'], NO_BID_HTTP_CODE, REQUIRE_SEATBID_VALIDATION);
+    $winningBid = processBids(
+        $dspResponse,
+        $params['width'],
+        $params['height'],
+        REQUIRE_SEATBID_VALIDATION,
+        NO_BID_HTTP_CODE,
+        NO_BID_HTTP_CODE
+    );
     $vastXml = processVAST($winningBid['adm'], $winningBid['price'] ?? null);
 
     echo $vastXml;
