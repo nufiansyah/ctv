@@ -1,6 +1,11 @@
 <?php
 declare(strict_types=1);
 
+/**
+ * Generate a unique request identifier.
+ *
+ * @return string Hex-encoded random identifier; falls back to uniqid on failure.
+ */
 function generateRequestId(): string {
     try {
         return bin2hex(random_bytes(16));
@@ -10,6 +15,11 @@ function generateRequestId(): string {
     }
 }
 
+/**
+ * Build an empty VAST XML response.
+ *
+ * @return string XML string containing a minimal VAST document.
+ */
 function buildEmptyVAST(): string {
     $xml = new SimpleXMLElement('<VAST/>');
     $xml->addAttribute('version', '4.0');

@@ -23,6 +23,8 @@ const DEFAULT_BIDFLOOR = 3;
 const DEFAULT_BIDFLOOR_CUR = 'USD';
 const DEFAULT_MIN_DURATION = 5;
 const DEFAULT_MAX_DURATION = 30;
+const NO_BID_HTTP_CODE = 204;
+const REQUIRE_SEATBID_VALIDATION = true;
 
 // ==================== Error Handling ====================
 error_reporting(E_ALL);
@@ -218,9 +220,7 @@ try {
     ];
 
     $dspResponse = makeMultiDspRequest($ortbRequest);
-    $noBidHttpCode = 204;
-    $requireSeatbidValidation = true;
-    $winningBid = processBids($dspResponse, $params['width'], $params['height'], $noBidHttpCode, $requireSeatbidValidation);
+    $winningBid = processBids($dspResponse, $params['width'], $params['height'], NO_BID_HTTP_CODE, REQUIRE_SEATBID_VALIDATION);
     $vastXml = processVAST($winningBid['adm'], $winningBid['price'] ?? null);
 
     echo $vastXml;
